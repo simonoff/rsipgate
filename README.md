@@ -1,26 +1,34 @@
-Configuration
-================
+# rsipgate
 
-    Sipgate.user     = "your-account"
-    Sipgate.password = "your-password"
+## Configuration
 
+``` ruby
+Sipgate.user     = "your-account"
+Sipgate.password = "your-password"
+```
 If hostname of sipgate different from api.sipgate.net you can set it:
-  
-    Sipgate.api_host = "another.api.host.sipgate.net"
 
+``` ruby
+Sipgate.api_host = "another.api.host.sipgate.net"
+```
 
-Usage
-============
+## Usage
 
-# send a pdf
-    
-    fax = Sipgate::Fax('4912345678', File.read("document.pdf"))
-    result = fax.send
+### send a pdf
 
-# check sending status
-    
-    status = fax.status(result.session_id)
+``` ruby    
+fax = Sipgate::Fax('4912345678', File.read("document.pdf"))
+result = fax.send
+```
 
+### check sending status
+
+``` ruby    
+status = fax.status(result.session_id)
+```
+
+## Copyrights
 
 Copyright (c) 2012 Alexander Simonov (http://simonov.me/), released under the MIT license
+
 Copyright (c) 2009 Digineo GmbH (http://www.digineo.de/), released under the MIT license
