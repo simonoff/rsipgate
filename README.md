@@ -1,5 +1,11 @@
 # rsipgate
 
+## Installation
+
+``` ruby
+gem 'rsipgate'
+```
+
 ## Configuration
 
 ``` ruby
