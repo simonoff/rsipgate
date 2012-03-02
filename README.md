@@ -9,13 +9,14 @@ gem 'rsipgate'
 ## Configuration
 
 ``` ruby
-Sipgate.user     = "your-account"
+Sipgate.user     = "your-account"  # the web user name, not the SIPid
 Sipgate.password = "your-password"
 ```
-If hostname of sipgate different from api.sipgate.net you can set it:
+
+If the api hostname differs from samurai.sipgate.net you can set it explicitly:
 
 ``` ruby
-Sipgate.api_host = "another.api.host.sipgate.net"
+Sipgate.api_host = "somehost.sipgate.net"
 ```
 
 ## Usage
@@ -23,14 +24,16 @@ Sipgate.api_host = "another.api.host.sipgate.net"
 ### send a pdf
 
 ``` ruby    
-fax = Sipgate::Fax('4912345678', File.read("document.pdf"))
-result = fax.send
+fax    = Sipgate::Fax.new
+result = fax.send('493012345678', File.read("document.pdf")) # number with national prefix, e.g. 4930xxxxxxxxx
+status = fax.status(result.session_id)
 ```
 
-### check sending status
+### send an sms
 
 ``` ruby    
-status = fax.status(result.session_id)
+sms = Sipgate::Sms.new
+sms.send('4915198765432', "This is a test!")
 ```
 
 ## Copyrights
