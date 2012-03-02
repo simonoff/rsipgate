@@ -1,12 +1,12 @@
 module Sipgate
   class Base
-    
+
     PATH = '/RPC2'
-    
+
     def my_api_host
-      Sipgate.api_host || 'api.sipgate.net'
+      Sipgate.api_host || 'samurai.sipgate.net'
     end
-    
+
     def initialize(user = nil, password = nil)
       user ||= Sipgate.user
       password ||= Sipgate.password
@@ -19,17 +19,17 @@ module Sipgate
         :port => 443
       })
     end
-    
+
     # queries the status of a fax
     def status(session_id)
       call "samurai.SessionStatusGet",
            'SessionID' => session_id
     end
-    
+
     def call(*args)
       response = Response.new(rubyized_hash(@client.call(*args)))
       unless response.success?
-        raise ::Sipgate::Exception, "Response failed with #{response.status_string} with code #{response.status_code}" 
+        raise ::Sipgate::Exception, "Response failed with #{response.status_string} with code #{response.status_code}"
       end
       response
     end
