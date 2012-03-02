@@ -26,9 +26,12 @@ Receivers come with national prefix and local code, e.g. 4969xxxxxxxxx, for Germ
 ### send a pdf
 
 ``` ruby    
-fax    = Sipgate::Fax.new
-result = fax.send('493012345678', File.read("document.pdf"))
-status = fax.status(result.session_id)
+fax      = Sipgate::Fax.new
+sender   = '15198765432'     # must be registered as fax device
+receiver = '496912345678'
+pdf_file = File.read("document.pdf")
+result   = fax.send(sender, receiver, pdf_file)
+status   = fax.status(result.session_id)
 ```
 
 ### send an sms
@@ -36,7 +39,7 @@ status = fax.status(result.session_id)
 ``` ruby    
 sms      = Sipgate::Sms.new
 sender   = '15198765432'     # must be validated in web frontend first
-receiver = '17512345678'
+receiver = '4917512345678'
 text     = "This is a test!" # max. 160 chars
 sms.send(sender, receiver, text)
 ```
@@ -44,4 +47,5 @@ sms.send(sender, receiver, text)
 ## Copyrights
 
 Copyright (c) 2012 Alexander Simonov (http://simonov.me/), released under the MIT license
+
 Copyright (c) 2009 Digineo GmbH (http://www.digineo.de/), released under the MIT license
