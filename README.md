@@ -21,23 +21,27 @@ Sipgate.api_host = "somehost.sipgate.net"
 
 ## Usage
 
+Receivers come with national prefix and local code, e.g. 4969xxxxxxxxx, for Germany (+49), Frankfurt (69).
+
 ### send a pdf
 
 ``` ruby    
 fax    = Sipgate::Fax.new
-result = fax.send('493012345678', File.read("document.pdf")) # number with national prefix, e.g. 4930xxxxxxxxx
+result = fax.send('493012345678', File.read("document.pdf"))
 status = fax.status(result.session_id)
 ```
 
 ### send an sms
 
 ``` ruby    
-sms = Sipgate::Sms.new
-sms.send('4915198765432', "This is a test!")
+sms      = Sipgate::Sms.new
+sender   = '15198765432'     # must be validated in web frontend first
+receiver = '17512345678'
+text     = "This is a test!" # max. 160 chars
+sms.send(sender, receiver, text)
 ```
 
 ## Copyrights
 
 Copyright (c) 2012 Alexander Simonov (http://simonov.me/), released under the MIT license
-
 Copyright (c) 2009 Digineo GmbH (http://www.digineo.de/), released under the MIT license
