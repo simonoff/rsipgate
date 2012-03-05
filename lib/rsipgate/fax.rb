@@ -1,15 +1,14 @@
 module Sipgate
   class Fax < Base
 
-    # send a fax
-    def send(sender, receiver, pdf_file)
-      sender.gsub!(/[+]|\s+/, "")
-      receiver.gsub!(/[+]|\s+/, "")
-      call "samurai.SessionInitiate",
-           'LocalUri'  => "sip:#{sender}@sipgate.net",
-           'RemoteUri' => "sip:#{receiver}@sipgate.net",
-           'TOS'       => 'fax',
-           'Content'   => ::Base64.encode64(pdf_file)
+    def send(receiver, pdf_file, sender=nil)
+      options = {
+        'RemoteUri' => "sip:#{strip(receiver)}@sipgate.net",
+        'TOS'       => 'fax',
+        'Content'   => ::Base64.encode64(pdf_file)
+      }
+
+      perform_transmission(options, sender)
     end
   end
 end

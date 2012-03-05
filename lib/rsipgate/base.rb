@@ -34,6 +34,15 @@ module Sipgate
       response
     end
 
+    def strip(phone_number)
+      phone_number.to_s.gsub(/[+\- ]+/, "")
+    end
+
+    def perform_transmission(options, sender)
+      options.merge!({'LocalUri' => "sip:#{strip(sender)}@sipgate.net"}) if sender
+      call "samurai.SessionInitiate", options
+    end
+
     # make server responses look more Ruby like (underscored Symbol as Hash keys)
     def rubyized_hash(h)
       h.inject({}) do |memo, (k, v)|
