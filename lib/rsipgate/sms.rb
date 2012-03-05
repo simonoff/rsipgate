@@ -1,14 +1,13 @@
 module Sipgate
   class Sms < Base
 
-    def send(receiver, text, sender=nil)
-      options = {
-        'RemoteUri' => "sip:#{strip(receiver)}@sipgate.net",
-        'TOS'       => 'text',
-        'Content'   => text[0..159]
-      }
+    TOS = 'text'
 
-      perform_transmission(options, sender)
+    def options(data)
+      {
+        'Content' => data[0..159]
+      }
     end
+
   end
 end

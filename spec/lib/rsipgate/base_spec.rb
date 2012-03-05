@@ -48,8 +48,4 @@ describe Sipgate::Base do
     it { should eql result_hash }
   end
 
-  context "#call" do
-
-  end
-
 end

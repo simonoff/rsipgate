@@ -34,12 +34,30 @@ module Sipgate
       response
     end
 
+    def send(receiver, data, sender=nil)
+      @receiver = receiver
+      @sender = sender
+      perform_transmission(options(data))
+    end
+
     def strip(phone_number)
       phone_number.to_s.gsub(/[+\- \.]+/, "")
     end
 
-    def perform_transmission(options, sender)
-      options.merge!({'LocalUri' => "sip:#{strip(sender)}@sipgate.net"}) if sender
+    def default_options
+      {
+        'RemoteUri' => "sip:#{strip(@receiver)}@sipgate.net",
+        'TOS'       => self.class::TOS
+      }
+    end
+
+    def options(data)
+      {}
+    end
+
+    def perform_transmission(options)
+      options.merge! default_options
+      options.merge!('LocalUri' => "sip:#{strip(@sender)}@sipgate.net") if @sender
       call "samurai.SessionInitiate", options
     end
 
