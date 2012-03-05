@@ -1,15 +1,14 @@
 module Sipgate
   class Sms < Base
 
-    # send an sms
-    def send(sender, receiver, text)
-      sender.gsub!(/[+]|\s+/, "")
-      receiver.gsub!(/[+]|\s+/, "")
-      call "samurai.SessionInitiate",
-           'LocalUri'  => "sip:#{sender}@sipgate.net",
-           'RemoteUri' => "sip:#{receiver}@sipgate.net",
-           'TOS'       => 'text',
-           'Content'   => text[0..159]
+    def send(receiver, text, sender=nil)
+      options = {
+        'RemoteUri' => "sip:#{strip(receiver)}@sipgate.net",
+        'TOS'       => 'text',
+        'Content'   => text[0..159]
+      }
+
+      perform_transmission(options, sender)
     end
   end
 end

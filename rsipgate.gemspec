@@ -1,6 +1,6 @@
 spec = Gem::Specification.new do |s|
   s.name = 'rsipgate'
-  s.version = "0.3"
+  s.version = "0.4"
   s.author = ["Alexander Simonov", "Corny", "Averell"]
   s.email = "alex@simonov.me"
   s.homepage = "http://github.com/simonoff/rsipgate"
