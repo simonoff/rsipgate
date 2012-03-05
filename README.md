@@ -31,7 +31,7 @@ fax      = Sipgate::Fax.new
 sender   = '15198765432'     # must be registered as fax device
 receiver = '496912345678'
 pdf_file = File.read("document.pdf")
-result   = fax.send(sender, receiver, pdf_file)
+result   = fax.send(receiver, pdf_file, sender)
 status   = fax.status(result.session_id)
 ```
 
@@ -42,7 +42,7 @@ sms      = Sipgate::Sms.new
 sender   = '15198765432'     # must be validated in web frontend first
 receiver = '4917512345678'
 text     = "This is a test!" # max. 160 chars
-sms.send(sender, receiver, text)
+sms.send(receiver, text, sender)
 ```
 
 ## Copyrights
