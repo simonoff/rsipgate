@@ -13,10 +13,11 @@ Sipgate.user     = "your-account"  # the web user name, not the SIPid
 Sipgate.password = "your-password"
 ```
 
-If the api hostname differs from samurai.sipgate.net you can set it explicitly:
+If the api hostname differs from samurai.sipgate.net you can set it explicitly.
+api.sipgate.net is used for team-customers, whereas samurai.sipgate.net is for basic and plus customers.
 
 ``` ruby
-Sipgate.api_host = "somehost.sipgate.net"
+Sipgate.api_host = "api.sipgate.net"
 ```
 
 ## Usage
