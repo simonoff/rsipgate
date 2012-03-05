@@ -35,7 +35,7 @@ module Sipgate
     end
 
     def strip(phone_number)
-      phone_number.to_s.gsub(/[+\- ]+/, "")
+      phone_number.to_s.gsub(/[+\- \.]+/, "")
     end
 
     def perform_transmission(options, sender)
@@ -50,7 +50,7 @@ module Sipgate
         when ::Hash
           rubyized_hash(v)
         when ::Array
-          v.map {|item| is_a?(::Hash) ? rubyized_hash(item) : item }
+          v.map {|item| item.is_a?(::Hash) ? rubyized_hash(item) : item }
         else
           v
         end
